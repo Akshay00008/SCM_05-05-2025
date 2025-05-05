@@ -21,15 +21,15 @@ def ask(data):
 
     # Handle "delivery_notes" (Convert to DataFrame)
     if isinstance(data, dict):
-        if "delivery_notes" in data:
-            delivery_notes_list = data["delivery_notes"]
+        if "deliveryNoteItems" in data:
+            delivery_notes_list = data["deliveryNoteItems"]
             
             if isinstance(delivery_notes_list, list):  # Ensure it's a list
                 df_delivery_notes = pd.DataFrame(delivery_notes_list)
 
         # Handle "delivery_note_mappings" (Extract DN and LPO numbers into lists)
-        if "delivery_note_mappings" in data:
-                delivery_mappings = data["delivery_note_mappings"]
+        if "deliveryNotes" in data:
+                delivery_mappings = data["deliveryNotes"]
                 
                 if isinstance(delivery_mappings, list):  # Ensure it's a list
                     for item in delivery_mappings:
@@ -201,8 +201,16 @@ def ask(data):
     print(df_delivery_notes)
     response_data = df_delivery_notes.to_dict(orient="records")
 
-    lpo_items=lpo_df.to_dict(orient="records")
+    # lpo_items=lpo_df.to_dict(orient="records")
+    lpo_df=lpo_df[['PO_NUMBER','DESCRIPTION']]
+    lpo_dict = (lpo_df.groupby('PO_NUMBER')['DESCRIPTION']
+            .apply(list)
+            .to_dict())
     print(response_data)
+    return {
+    "deliveryNoteItems": response_data,
+    "lpoItems": lpo_dict
+}
     # Return response using make_response()
-    return (response_data,lpo_items)
+    # return (response_data,lpo_items)
     
