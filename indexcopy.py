@@ -152,7 +152,7 @@ def process_anpr():
         
         # Process the image to crop and detect the license plate
         cropped_image_path = license_plate_detector.process_image(image_path)
-        print("cropped_image_path" :cropped_image_path)
+        print("cropped_image_path:",cropped_image_path)
         
         if not cropped_image_path:
             print("line 157:",cropped_image_path )
