@@ -137,6 +137,7 @@ def process_anpr():
     image_path = data.get('image_path')
     
     if not data or not image_path:
+        print("line 140")
         return jsonify({"error": "Missing image path"}), 400
     
     try:
@@ -151,8 +152,10 @@ def process_anpr():
         
         # Process the image to crop and detect the license plate
         cropped_image_path = license_plate_detector.process_image(image_path)
+        print("cropped_image_path" :cropped_image_path)
         
         if not cropped_image_path:
+            print("line 157" :cropped_image_path )
             return jsonify({"error": "No license plate detected or cropped."}), 400
         print("******************")
         print(cropped_image_path)
@@ -254,7 +257,7 @@ def verify_truck_empty():
 def mapping():
     try:
         # Pass the request data to the core logic function
-        response = process_data(request.get_json())
+        response = ask(request.get_json())
         return jsonify(response), 200
     except Exception as e:
         return jsonify({'error': str(e)}), 500
