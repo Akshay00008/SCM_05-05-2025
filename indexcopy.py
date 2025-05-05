@@ -155,7 +155,7 @@ def process_anpr():
         print("cropped_image_path" :cropped_image_path)
         
         if not cropped_image_path:
-            print("line 157" :cropped_image_path )
+            print("line 157:",cropped_image_path )
             return jsonify({"error": "No license plate detected or cropped."}), 400
         print("******************")
         print(cropped_image_path)
