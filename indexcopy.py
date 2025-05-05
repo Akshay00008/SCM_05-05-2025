@@ -144,7 +144,7 @@ def process_anpr():
         model_path = r"license_plate_detector.pt"
         temp_input_folder = r"temp_input"
         temp_output_folder = r"temp_output"
-        temp_cropped_folder = r"/home/bramhesh_srivastav/DS_SCM/temp_cropped"
+        temp_cropped_folder = r"/DS_SCM/temp_cropped"
         
         # Initialize detector and text extractor
         license_plate_detector = LicensePlateDetector(model_path, temp_input_folder, temp_output_folder, temp_cropped_folder)
